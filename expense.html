@@ -1,0 +1,132 @@
+
+Expense calculator clean · HTML
+<!DOCTYPE html>
+<html>
+<head>
+<title>Personal Expense Calculator</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background-color: #f2f2f2;
+margin: 0;
+padding: 20px;
+}
+.container {
+max-width: 500px;
+margin: auto;
+background: #ffffff;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+h1 {
+text-align: center;
+color: #333333;
+font-size: 22px;
+}
+label {
+display: block;
+margin-top: 12px;
+font-weight: bold;
+color: #333333;
+}
+input[type="number"] {
+width: 100%;
+padding: 8px;
+margin-top: 4px;
+border: 1px solid #cccccc;
+border-radius: 4px;
+box-sizing: border-box;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+input[type="number"] {
+-moz-appearance: textfield;
+}
+button {
+margin-top: 18px;
+width: 100%;
+padding: 10px;
+background-color: #4CAF50;
+color: white;
+border: none;
+border-radius: 4px;
+font-size: 16px;
+cursor: pointer;
+}
+button:hover {
+background-color: #43a047;
+}
+.summary {
+margin-top: 20px;
+padding: 10px;
+background-color: #e8f5e9;
+border-left: 5px solid #4CAF50;
+display: none;
+}
+.summary p {
+margin: 5px 0;
+}
+.savings {
+font-weight: bold;
+color: #2e7d32;
+}
+.overspend {
+color: #c62828;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Personal Expense Calculator</h1>
+<label for="income">Monthly Income (₹)</label>
+<input type="number" id="income" placeholder="Enter income">
+<label for="food">Food (₹)</label>
+<input type="number" id="food" placeholder="0">
+<label for="rent">Rent (₹)</label>
+<input type="number" id="rent" placeholder="0">
+<label for="transport">Transport (₹)</label>
+<input type="number" id="transport" placeholder="0">
+<label for="bills">Bills (₹)</label>
+<input type="number" id="bills" placeholder="0">
+<label for="entertainment">Entertainment (₹)</label>
+<input type="number" id="entertainment" placeholder="0">
+<button onclick="calculate()">Calculate</button>
+<div class="summary" id="summary">
+<p>Total Expenses: ₹<span id="totalExpense">0</span></p>
+<p class="savings">Savings: ₹<span id="savings">0</span></p>
+<p id="status">Status: -</p>
+</div>
+</div>
+<script>
+function calculate() {
+var income = parseFloat(document.getElementById("income").value) || 0;
+var food = parseFloat(document.getElementById("food").value) || 0;
+var rent = parseFloat(document.getElementById("rent").value) || 0;
+var transport = parseFloat(document.getElementById("transport").value) || 0;
+var bills = parseFloat(document.getElementById("bills").value) || 0;
+var entertainment = parseFloat(document.getElementById("entertainment").value) || 0;
+var totalExpense = food + rent + transport + bills + entertainment;
+var savings = income - totalExpense;
+document.getElementById("totalExpense").innerText = totalExpense;
+document.getElementById("savings").innerText = savings;
+var statusEl = document.getElementById("status");
+if (savings < 0) {
+statusEl.innerText = "Status: Overspending!";
+statusEl.className = "overspend";
+} else if (savings < income * 0.2) {
+statusEl.innerText = "Status: Low Savings";
+statusEl.className = "";
+} else {
+statusEl.innerText = "Status: Good Savings";
+statusEl.className = "";
+}
+document.getElementById("summary").style.display = "block";
+}
+</script>
+</body>
+</html>
+ 
